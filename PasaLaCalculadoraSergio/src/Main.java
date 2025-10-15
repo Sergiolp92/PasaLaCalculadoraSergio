@@ -8,10 +8,12 @@ public class Main {
     private static int numeroJugador;
     private static int numeroAnterior;
 
-    private static int contador;
-
 
     public static void main(String[] args) {
+        int turnoActual = 0;
+
+
+
         System.out.println("------------------------------------------------------------------------");
         System.out.println("Bienvenidos al juego de <Pasa la Calculadora>, las reglas del juego son las siguientes: Un jugador establecerá el objetivo del juego," +
                 "una vez establecido el objetivo, los jugadores iran introduciendo y sumando numeros del 1 al 9" +
@@ -22,7 +24,8 @@ public class Main {
         System.out.println("-----------------------------------------------------------------------");
         System.out.println("Bienvenido, introduce el numero objetivo, entre el 10 y el 99");
         numeroObjetivo = pedirNumeroObjetivo();
-
+        turnoActual = siguienteTurno(turnoActual);
+        System.out.println("------------- turno" + " " + turnoActual + " " + "---------------");
         System.out.println("Comienza la partida, el objetivo del juego es el número" + " " + numeroObjetivo);
         System.out.println("Jugador nº1 introduce un número del 1 al 9");
         numeroJugador = pedirNumeroJugador();
@@ -30,83 +33,80 @@ public class Main {
 
         System.out.println("jugador nº 2 introduce un número del 1 al 9");
         numeroJugador = pedirNumeroJugador();
-        numeroJugador = comprobarNumeroJugador(numeroJugador, numeroAnterior);
-        numeroAnterior = numeroJugador;
-
-
+        boolean valido = false;
+        int total = numeroJugador + numeroAnterior;
+        while (!valido){
+             valido = comprobarNumeroJugador(numeroJugador , numeroAnterior);
+             if(!valido){
+                 System.out.println("Introduce un número en la misma fila y columna");
+                 numeroJugador = pedirNumeroJugador();
+             }
+        }
+        System.out.println("El total es" + " " + total);
+        turnoActual = siguienteTurno(turnoActual);
+        System.out.println("------------- turno" + " " + turnoActual + " " + "---------------");
 
 
 
 
     }
 
-    private static int comprobarNumeroJugador(int numeroJugador, int numeroAnterior) {
-        Scanner sc = new Scanner(System.in);
+    private static int siguienteTurno(int turnoactual) {
+        turnoactual++;
+        return turnoactual;
+    }
+
+    private static boolean comprobarNumeroJugador(int numeroJugador, int numeroAnterior) {
 
 
         if (numeroJugador == 1) {
-            while (numeroJugador != 4 && numeroJugador != 7 && numeroJugador != 2 && numeroJugador != 3) {
-                System.out.println("nº no válido, por favor introduce un nº en la misma fila columna, y que no sea igual al anterior");
-               numeroJugador = sc.nextInt();
+            if (numeroAnterior == 4 || numeroAnterior == 7 || numeroAnterior == 2 || numeroAnterior == 3){
+
+                return true;
             }
         }
         if (numeroJugador == 2) {
-            while (numeroJugador != 1 && numeroJugador != 3 && numeroJugador != 5 && numeroJugador != 8) {
-                System.out.println("nº no válido, por favor introduce un nº en la misma fila columna, y que no sea igual al anterior");
-                numeroJugador = sc.nextInt();
+            if (numeroAnterior == 1 || numeroAnterior == 3 || numeroAnterior == 5 || numeroAnterior == 8) {
+                return true;
             }
         }
         if (numeroJugador == 3) {
-            while (numeroJugador != 1 && numeroJugador != 2 && numeroJugador != 6 && numeroJugador != 9) {
-                System.out.println("nº no válido, por favor introduce un nº en la misma fila columna, y que no sea igual al anterior");
-                numeroJugador = sc.nextInt();
+            if (numeroAnterior == 1 || numeroAnterior == 2 || numeroAnterior == 6 || numeroAnterior == 9) {
+
             }
         }
         if (numeroJugador == 4) {
-            while (numeroJugador != 1 && numeroJugador != 5 && numeroJugador != 6 && numeroJugador != 7) {
-                System.out.println("nº no válido, por favor introduce un nº en la misma fila columna, y que no sea igual al anterior");
-                numeroJugador = sc.nextInt();
+            if (numeroAnterior == 1 || numeroAnterior == 5 || numeroAnterior == 6 || numeroAnterior == 7) {
+                return true;
             }
         }
-        if (Main.numeroJugador == 5) {
-            while (numeroJugador != 2 && numeroJugador != 4 && numeroJugador != 6 && numeroJugador != 8) {
-                System.out.println("nº no válido, por favor introduce un nº en la misma fila columna, y que no sea igual al anterior");
-                numeroJugador = sc.nextInt();
+        if (numeroJugador == 5) {
+            if (numeroAnterior == 2 || numeroAnterior == 4 || numeroAnterior == 6 || numeroAnterior == 8) {
+                return true;
             }
         }
-        if (Main.numeroJugador == 6) {
-            while (numeroJugador != 4 && numeroJugador != 5 && numeroJugador != 3 && numeroJugador != 9) {
-                System.out.println("nº no válido, por favor introduce un nº en la misma fila columna, y que no sea igual al anterior");
-               numeroJugador = sc.nextInt();
+        if (numeroJugador == 6) {
+            if (numeroAnterior == 4 || numeroAnterior == 5 || numeroAnterior == 3 || numeroAnterior == 9) {
+                return true;
             }
         }
-        if (Main.numeroJugador == 7) {
-            while (Main.numeroJugador != 1 && numeroJugador != 4 && numeroJugador != 8 && numeroJugador != 9) {
-                System.out.println("nº no válido, por favor introduce un nº en la misma fila columna, y que no sea igual al anterior");
-               numeroJugador = sc.nextInt();
+        if (numeroJugador == 7) {
+            if (numeroAnterior == 1 || numeroAnterior == 4 || numeroAnterior == 8 || numeroAnterior == 9) {
+                return true;
             }
         }
-        if (Main.numeroJugador == 8) {
-            while (numeroJugador != 2 && numeroJugador != 5 && numeroJugador != 7 && numeroJugador != 9) {
-                System.out.println("nº no válido, por favor introduce un nº en la misma fila columna, y que no sea igual al anterior");
-                numeroJugador = sc.nextInt();
+        if (numeroJugador == 8) {
+            if (numeroAnterior == 2 || numeroAnterior == 5 || numeroAnterior == 7 || numeroAnterior == 9) {
+                return true;
             }
         }
         if (numeroJugador == 9) {
-            while (numeroJugador != 3 && numeroJugador != 6 && numeroJugador != 7 && numeroJugador != 8) {
-                System.out.println("nº no válido, por favor introduce un nº en la misma fila columna, y que no sea igual al anterior");
-                numeroJugador = sc.nextInt();
+            if (numeroAnterior == 3 || numeroAnterior == 6 || numeroAnterior == 7 || numeroAnterior == 8) {
+                return true;
             }
+
         }
-        if (numeroJugador == 0) {
-            System.out.println("nº no válido, por favor introduce un nº entre 1 y 9");
-            numeroJugador = sc.nextInt();
-        }
-        if (numeroJugador < 0 || numeroJugador >= 10) {
-            System.out.println("nº no válido, por favor introduce un nº entre 1 y 9");
-            numeroJugador = sc.nextInt();
-        }
-        return numeroJugador;
+        return false;
 
     }
 
@@ -151,4 +151,4 @@ public class Main {
         return numeroObjetivo;
     }
 
-}
+}  
